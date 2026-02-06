@@ -1,0 +1,283 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;800&display=swap');
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #1a1a2e;
+    color: white;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+.scene {
+    display: none;
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+}
+
+.scene.active { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+/* Scene 1: The Invitation */
+#scene1 {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.envelope {
+    width: 300px;
+    height: 200px;
+    background: #f4f4f4;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.envelope:hover { 
+    transform: scale(1.05); 
+}
+
+.envelope::before {
+    content: '💌';
+    font-size: 60px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.click-hint {
+    margin-top: 30px;
+    font-size: 1.2em;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Scene 2: Memory Wall */
+#scene2 {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.photo-wall {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    max-width: 800px;
+    width: 100%;
+}
+
+.polaroid {
+    background: white;
+    padding: 10px 10px 30px 10px;
+    border-radius: 10px;
+    transform: rotate(var(--rotation));
+    transition: all 0.3s;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.polaroid:hover {
+    transform: rotate(0deg) scale(1.1);
+    z-index: 10;
+}
+
+.polaroid-img {
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(45deg, #ffd89b 0%, #19547b 100%);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+}
+
+.polaroid-text {
+    color: #333;
+    text-align: center;
+    margin-top: 10px;
+    font-family: 'Pacifico', cursive;
+    font-size: 0.9em;
+}
+
+/* Scene 3: The Quest */
+#scene3 {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.game-container {
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 600px;
+    width: 100%;
+    backdrop-filter: blur(10px);
+}
+
+.quest-box {
+    background: rgba(255,255,255,0.2);
+    border-radius: 15px;
+    padding: 20px;
+    margin: 15px 0;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+}
+
+.quest-box:hover {
+    background: rgba(255,255,255,0.3);
+    transform: translateX(10px);
+    border-color: #ffd700;
+}
+
+.quest-completed {
+    background: rgba(0,255,0,0.3) !important;
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+/* Scene 4: Final Surprise */
+#scene4 {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    text-align: center;
+}
+
+.treasure-box {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(145deg, #ffd700, #ffed4e);
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 20px 60px rgba(255, 215, 0, 0.4);
+    transition: all 0.3s;
+    margin: 30px auto;
+}
+
+.treasure-box:hover { 
+    transform: scale(1.1); 
+}
+
+.treasure-box::before {
+    content: '🎁';
+    font-size: 80px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.treasure-open {
+    animation: shake 0.5s, openBox 1s forwards;
+}
+
+@keyframes shake {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    75% { transform: rotate(10deg); }
+}
+
+@keyframes openBox {
+    to { 
+        transform: scale(1.2) rotateY(180deg); 
+        opacity: 0; 
+    }
+}
+
+.final-message {
+    display: none;
+    background: rgba(255,255,255,0.95);
+    color: #333;
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 500px;
+    animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.nav-btn {
+    background: white;
+    color: #764ba2;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.1em;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-top: 30px;
+    font-weight: 600;
+    transition: all 0.3s;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.nav-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+h2 {
+    font-family: 'Pacifico', cursive;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 5px;
+    background: #ffd700;
+    width: 25%;
+    transition: width 0.5s;
+    z-index: 1000;
+}
+
+/* Floating elements */
+.floater {
+    position: absolute;
+    font-size: 30px;
+    animation: float 6s ease-in-out infinite;
+    opacity: 0.6;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-30px) rotate(10deg); }
+}
+
+.heart-container {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.heart {
+    position: absolute;
+    font-size: 20px;
+    animation: flyUp 2s ease-out forwards;
+}
+
+@keyframes flyUp {
+    0% { transform: translateY(0) scale(0); opacity: 1; }
+    50% { transform: translateY(-100px) scale(1.2); }
+    100% { transform: translateY(-300px) scale(1); opacity: 0; }
+}
